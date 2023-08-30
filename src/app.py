@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 from swiplserver import PrologMQI, PrologThread
 import pandas as pd
 import plotly.express as px
+import pyswip
 import json
 import re
 import os
