@@ -1,7 +1,11 @@
-import dash
-import pandas as pd
-from dash import Dash, dash_table, dcc, html, Input, Output, State
-import plotly.express as px
+# package imports
+from dash import html, Dash, dcc, Input, Output, callback, State, no_update, dash_table, ctx, callback_context, Patch, ALL
+import dash_bootstrap_components as dbc
+from swiplserver import PrologMQI, PrologThread
+import json
+import re
+import os
+import glob
 
 
 app = Dash(__name__)
@@ -58,4 +62,8 @@ def download_data(n_clicks, data):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    with PrologMQI() as mqi:
+        with mqi.create_thread() as main_prolog_thread:
+            with mqi.create_thread() as negative_prediction_thread:
+                main_prolog_thread.query(f"A=4.")
+                app.run_server(debug=True)
