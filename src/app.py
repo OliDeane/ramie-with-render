@@ -2,6 +2,8 @@
 from dash import html, Dash, dcc, Input, Output, callback, State, no_update, dash_table, ctx, callback_context, Patch, ALL
 import dash_bootstrap_components as dbc
 from swiplserver import PrologMQI, PrologThread
+import pandas as pd
+import plotly.express as px
 import json
 import re
 import os
@@ -31,7 +33,7 @@ download_component = dcc.Download()
 
 app.layout = html.Div(
     [
-        html.H2("RAIMEE Data Download RAIMEE", style={"marginBottom": 20}),
+        html.H2("RAIMEE Data Download SwiplServer", style={"marginBottom": 20}),
         download_component,
         range_slider,
         download_button,
