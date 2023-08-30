@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 from swiplserver import PrologMQI, PrologThread
 import pandas as pd
 import plotly.express as px
+import pyswip
 import json
 import re
 import os
@@ -33,7 +34,7 @@ download_component = dcc.Download()
 
 app.layout = html.Div(
     [
-        html.H2("RAIMEE Data Download SwiplServer", style={"marginBottom": 20}),
+        html.H2("RAIMEE Data Download PySwipl", style={"marginBottom": 20}),
         download_component,
         range_slider,
         download_button,
