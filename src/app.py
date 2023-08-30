@@ -9,42 +9,42 @@ import re
 import os
 import glob
 
+with PrologMQI() as mqi:
+    with mqi.create_thread() as main_prolog_thread:
+        
+        app = Dash(__name__)
+        server = app.server
 
-app = Dash(__name__)
-server = app.server
+        download_button = html.Button(id="download_button",children=["Download Filtered CSV"], style={"marginTop": 20})
+        # download_component = dcc.Download()
 
-download_button = html.Button(id="download_button",children=["Download Filtered CSV"], style={"marginTop": 20})
-# download_component = dcc.Download()
+        app.layout = html.Div(
+            [
+                html.H2("RAIMEE Data Download PySwipl", style={"marginBottom": 20}),
+                # download_component,
+                # range_slider,
+                download_button,
+                html.Div(id="output", children = [])
+                # dtable,
+            ]
+        )
 
-app.layout = html.Div(
-    [
-        html.H2("RAIMEE Data Download PySwipl", style={"marginBottom": 20}),
-        # download_component,
-        # range_slider,
-        download_button,
-        html.Div(id="output", children = [])
-        # dtable,
-    ]
-)
+        @app.callback(
+            Output("output", "children"),
+            Input("download_button", "n_clicks"),
+        )
+        def download_data(n_clicks):
+            # dff = pd.DataFrame(data)
+            if not n_clicks:
+                return no_update
+                # Load in a test file
+            with open('test.json') as meta_data:
+                selected_data = json.load(meta_data)
 
-@app.callback(
-    Output("output", "children"),
-    Input("download_button", "n_clicks"),
-)
-def download_data(n_clicks):
-    # dff = pd.DataFrame(data)
-    if not n_clicks:
-        return no_update
-        # Load in a test file
-    with open('test.json') as meta_data:
-        selected_data = json.load(meta_data)
+            selected_data = selected_data[str(3)]['title']
+            main_prolog_thread.query(f"A=4.")
+            return html.Div([html.P(str(selected_data)+str(3))])
 
-    selected_data = selected_data[str(global_test)]['title']
-    main_prolog_thread.query(f"A=4.")
-    return html.Div([html.P(str(selected_data)+str(global_test))])
+        # if __name__ == "__main__":
 
-if __name__ == "__main__":
-    with PrologMQI() as mqi:
-        with mqi.create_thread() as main_prolog_thread:
-            global_test = 3
-            app.run_server(debug=True)
+        app.run_server(debug=True)
