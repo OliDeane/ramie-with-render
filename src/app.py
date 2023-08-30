@@ -36,15 +36,15 @@ def download_data(n_clicks):
     if not n_clicks:
         return no_update
         # Load in a test file
-    global main_prolog_thread
     with open('test.json') as meta_data:
         selected_data = json.load(meta_data)
-    selected_data = selected_data[str(3)]['title']
+
+    selected_data = selected_data[str(global_test)]['title']
     main_prolog_thread.query(f"A=4.")
-    return html.Div([html.P(str(selected_data))])
+    return html.Div([html.P(str(selected_data)+str(global_test))])
 
 if __name__ == "__main__":
     with PrologMQI() as mqi:
         with mqi.create_thread() as main_prolog_thread:
-            main_prolog_thread.query(f"A=4.")
+            global_test = 3
             app.run_server(debug=True)
