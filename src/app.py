@@ -67,7 +67,7 @@ def download_data(n_clicks):
     with open('test.json') as meta_data:
         selected_data = json.load(meta_data)
     selected_data = selected_data[str(3)]['title']
-
+    main_prolog_thread.query(f"A=4.")
     return html.Div([html.P(str(selected_data))])
     # return dcc.send_data_frame(dff.to_csv, "filtered_csv.csv")
 
