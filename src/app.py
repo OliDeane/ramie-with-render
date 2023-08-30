@@ -4,7 +4,6 @@ import dash_bootstrap_components as dbc
 from swiplserver import PrologMQI, PrologThread
 import pandas as pd
 import plotly.express as px
-import pyswip
 import json
 import re
 import os
@@ -65,6 +64,11 @@ def download_data(n_clicks, data):
 
 
 if __name__ == "__main__":
+
+    # Load in a test file
+    with open('src/test.json', "w") as f:
+        json.dump({}, f)
+
     with PrologMQI() as mqi:
         with mqi.create_thread() as main_prolog_thread:
             with mqi.create_thread() as negative_prediction_thread:
