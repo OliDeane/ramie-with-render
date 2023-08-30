@@ -3,6 +3,7 @@ import pandas as pd
 from dash import Dash, dash_table, dcc, html, Input, Output, State
 import plotly.express as px
 
+
 app = Dash(__name__)
 server = app.server
 
@@ -26,7 +27,7 @@ download_component = dcc.Download()
 
 app.layout = html.Div(
     [
-        html.H2("RAIMEE Data Download", style={"marginBottom": 20}),
+        html.H2("RAIMEE Data Download RAIMEE", style={"marginBottom": 20}),
         download_component,
         range_slider,
         download_button,
