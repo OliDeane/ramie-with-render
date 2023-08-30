@@ -64,9 +64,11 @@ def download_data(n_clicks):
     if not n_clicks:
         return no_update
         # Load in a test file
-    with open('src/test.json', "w") as f:
-        json.dump({}, f)
-    return html.Div([html.P(str(n_clicks))])
+    with open('test.json') as meta_data:
+        selected_data = json.load(meta_data)
+    selected_data = selected_data[str(3)]['title']
+
+    return html.Div([html.P(str(selected_data))])
     # return dcc.send_data_frame(dff.to_csv, "filtered_csv.csv")
 
 
